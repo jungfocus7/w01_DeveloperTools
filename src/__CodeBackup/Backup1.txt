@@ -1,0 +1,324 @@
+package
+{
+    import flash.display.DisplayObject;
+    import flash.display.Loader;
+    import flash.display.MovieClip;
+    import flash.display.Sprite;
+    import flash.events.Event;
+    import flash.events.InvokeEvent;
+    import flash.events.MouseEvent;
+
+    import hobis.airpc.CNwndBase;
+    import hobis.airpc.MAppXmlUpdateCounter;
+    import hobis.airpc.MNwndHelper;
+    import hobis.prepared.MMakeFormat;
+
+    import jhb0b.utils.MLoaderUtil;
+    import jhb0b.utils.MTextFieldUtil;
+
+
+
+    [SWF(width="400", height="600", frameRate="30")]
+    public final class CMain extends CNwndBase
+    {
+        protected override function ppInitOnce(evt:Event):void
+        {
+            super.ppInitOnce(evt);
+
+
+            MAppXmlUpdateCounter.Update(MMakeFormat.make('{#XXOP#}yyMMddhhmmssfff'));
+            MNwndHelper.align_rightBottom(_nwnd, 100, 40);
+
+            _napp.addEventListener(InvokeEvent.INVOKE, ppAppInvoke);
+        }
+
+        private static const __ItemDataArr:Array = [
+            { title: 'RegEx-Tool' },
+            { title: 'Base64-Tool' },
+            { title: 'UrlEncoding-Tool' }
+        ];
+
+        private var _loader:Loader;
+        private var _itemCont:Sprite;
+        private var _itemProto:Class;
+        private var _itemFilters:Array;
+        private var _itemClipArr:Array;
+
+
+
+
+
+
+        private function pp_ido_click(evt:MouseEvent):void
+        {
+        }
+
+        private function ppAppInvoke(evt:InvokeEvent):void
+        {
+            _nwnd.title = '[Developer Tools  ver 1.00]';
+
+
+            _loader = MLoaderUtil.createAndLoad(_own, './Assets.swf', null,
+                function(evt: Event):void {
+                    _itemCont = Sprite(_loader.content);
+
+                    var tdo:DisplayObject = _itemCont['mcRectProto'];
+                    _itemFilters = tdo.filters;
+                    _itemProto = tdo['constructor'];
+                    _itemCont.removeChild(tdo);
+
+                    for (var i:uint = 0, l:uint = __ItemDataArr.length; i < l; i++)
+                    {
+                        var timc:MovieClip = MovieClip(new _itemProto());
+                        _itemCont.addChild(timc);
+                        timc.filters = _itemFilters;
+                        timc.x = 10, timc.y = 10 + ((80 + 10) * i);
+
+                        var tid:Object = __ItemDataArr[i];
+                        MTextFieldUtil.set_text(timc, 'tf_1', tid.title);
+
+                        timc.mouseChildren = false;
+                        timc.buttonMode = true;
+                        timc.addEventListener(MouseEvent.CLICK, pp_ido_click);
+                    }
+
+
+
+
+
+
+
+
+
+
+
+                    //trace(_srt['mcRectProto']);
+
+                    // var tmc:MovieClip = MovieClip(_ld.content);
+                    // MDisplayObjectContainerUtil.contLoop(tmc,
+                    //     function(tdo: DisplayObject, ti: int):Boolean
+                    //     {
+                    //         /*
+                    //         if (tdo is Loader)
+                    //         {
+                    //             var tld:Loader = Loader(tdo);
+                    //             trace(tld.content);
+                    //         }*/
+                    //         //trace(tdo.filters);
+
+                    //         return false;
+                    //     });
+                }
+            );
+
+
+            //_own.addChild()
+            /*
+            var ss:Sprite = Sprite(new __Assets_ByteClass());
+            _own.addChild(ss);*/
+
+            // MDisplayObjectContainerUtil.contLoop(ss,
+            //     function(tdo:DisplayObject, ti:int):Boolean
+            //     {
+            //         /*
+            //         if (tdo is Loader)
+            //         {
+            //             var tld:Loader = Loader(tdo);
+            //             trace(tld.content);
+            //         }*/
+            //         trace(tdo is Loader);
+
+            //         return false;
+            //     });
+
+        }
+
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+package
+{
+    import flash.display.DisplayObject;
+    import flash.display.Loader;
+    import flash.display.Sprite;
+    import flash.events.Event;
+    import flash.events.InvokeEvent;
+    import flash.events.MouseEvent;
+
+    import hobis.airpc.CNwndBase;
+    import hobis.airpc.MAppXmlUpdateCounter;
+    import hobis.airpc.MNwndHelper;
+    import hobis.prepared.MMakeFormat;
+
+    import jhb0b.utils.MLoaderUtil;
+    import jhb0b.utils.MTextFieldUtil;
+
+
+
+    [SWF(width="400", height="600", frameRate="30")]
+    public final class CMain extends CNwndBase
+    {
+        // [Embed(source="./Assets.swf")]
+        // private static const __Assets_ByteClass:Class;
+
+        // ///~~~~
+        // {
+        // }
+
+        protected override function ppInitOnce(evt:Event):void
+        {
+            super.ppInitOnce(evt);
+
+
+            MAppXmlUpdateCounter.Update(MMakeFormat.make('{#XXOP#}yyMMddhhmmssfff'));
+            MNwndHelper.align_rightBottom(_nwnd, 100, 40);
+
+            _napp.addEventListener(InvokeEvent.INVOKE, ppAppInvoke);
+        }
+
+        private static const __ItemDataArr:Array = [
+            { title: 'RegEx-Tool' },
+            { title: 'Base64-Tool' },
+            { title: 'UrlEncoding-Tool' }
+        ];
+
+        private var _loader:Loader;
+        private var _itemCont:Sprite;
+        private var _itemProto:Class;
+        private var _itemFilters:Array;
+        private var _itemClipArr:Array;
+
+
+
+
+
+
+        private function pp_ido_click(evt:MouseEvent):void
+        {
+        }
+
+        private function ppAppInvoke(evt:InvokeEvent):void
+        {
+            // if (!Capabilities.isDebugger)
+            // {
+            //     const targs:Array = evt.arguments;
+            //     if ((targs == null) || (targs.length >= 0))
+            //     {
+            //         _napp.exit(1);
+            //         return;
+            //     }
+            // }
+
+
+            _nwnd.title = '[Developer Tools  ver 1.00]';
+
+
+            _loader = MLoaderUtil.createAndLoad(_own, './Assets.swf', null,
+                function(evt: Event):void {
+                    _itemCont = Sprite(_loader.content);
+
+                    var tdo:DisplayObject = _itemCont['mcRectProto'];
+                    _itemFilters = tdo.filters;
+                    _itemProto = tdo['constructor'];
+                    _itemCont.removeChild(tdo);
+                    //trace('_itemProto: ' + _itemProto);
+
+
+                    for (var i:uint = 0, l:uint = __ItemDataArr.length; i < l; i++)
+                    {
+                        var timc:Sprite = Sprite(new _itemProto());
+                        timc.filters = _itemFilters;
+                        timc.x = 10, timc.y = 10 + ((80 + 10) * i);
+                        _itemCont.addChild(timc);
+                        trace(timc);
+
+                        var tid:Object = __ItemDataArr[i];
+                        MTextFieldUtil.set_text(timc, 'tf_1', tid.title);
+                        trace('tid.title: ' + tid.title);
+
+                        // var tic:CItemClip = new CItemClip(timc);
+                        // if (_itemClipArr == null) _itemClipArr = [];
+                        // _itemClipArr.push(tic);
+                        //timc.mouseChildren = false;
+                        //timc.buttonMode = true;
+                        //timc.addEventListener(MouseEvent.CLICK, pp_ido_click);
+                    }
+
+
+
+
+
+
+
+
+
+
+
+                    //trace(_srt['mcRectProto']);
+
+                    // var tmc:MovieClip = MovieClip(_ld.content);
+                    // MDisplayObjectContainerUtil.contLoop(tmc,
+                    //     function(tdo: DisplayObject, ti: int):Boolean
+                    //     {
+                    //
+                    //         if (tdo is Loader)
+                    //         {
+                    //             var tld:Loader = Loader(tdo);
+                    //             trace(tld.content);
+                    //         }
+                    //         //trace(tdo.filters);
+
+                    //         return false;
+                    //     });
+                }
+            );
+
+
+            //_own.addChild()
+            var ss:Sprite = Sprite(new __Assets_ByteClass());
+            _own.addChild(ss);*/
+
+            // MDisplayObjectContainerUtil.contLoop(ss,
+            //     function(tdo:DisplayObject, ti:int):Boolean
+            //     {
+            //         if (tdo is Loader)
+            //         {
+            //             var tld:Loader = Loader(tdo);
+            //             trace(tld.content);
+            //         }
+            //         trace(tdo is Loader);
+
+            //         return false;
+            //     });
+
+        }
+
+
+
+    }
+}
+
+*/

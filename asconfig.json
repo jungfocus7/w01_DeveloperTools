@@ -1,0 +1,16 @@
+{
+	"config": "air",
+	"compilerOptions": {
+		"output": "bin/DeveloperTools.swf",
+		"source-path": [
+			"src"
+		],
+		"library-path": [
+			"src"
+		]
+	},
+	"application": "src/DeveloperTools-app.xml",
+	"files": [
+		"src/CEntryPoint.as"
+	]
+}
