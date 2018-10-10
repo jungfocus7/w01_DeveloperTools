@@ -1,5 +1,6 @@
 package
 {
+    import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
     import flash.display.MovieClip;
     import flash.display.Sprite;
@@ -9,12 +10,11 @@ package
     import flash.text.TextField;
 
     import jhb0b.core.CContainerWrapper;
+    import jhb0b.events.CBumEvent;
     import jhb0b.utils.MMovieClipUtil;
     import jhb0b.utils.MURLLoaderUtil;
     import jhb0b.whats.CBumScrolling;
-    import jhb0b.events.CBumEvent;
-    import jhb0b.utils.MStringUtil;
-    import flash.display.DisplayObject;
+
 
 
     public class CFla00Main extends CContainerWrapper
@@ -92,8 +92,14 @@ package
         {
             var tdo:DisplayObject = DisplayObject(evt.currentTarget);
             var ti:uint = _itemCont.getChildIndex(tdo);
+            var tx:XML = _xml.children()[ti];
             this.dispatchEvent(new CBumEvent(ET_ITEM_CLICK,
-                { mdnm: _xml.children()[ti].attribute('FileName').toString() }));
+                {
+                    mdtit: tx.attribute('Title').toString(),
+                    mdnm: tx.attribute('FileName').toString(),
+                    mdw: Number(tx.attribute('Width').toString()),
+                    mdh: Number(tx.attribute('Height').toString())
+                }));
         }
     }
 }

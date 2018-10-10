@@ -36,8 +36,8 @@ package
             MAppXmlUpdateCounter.Update(MMakeFormat.make('{#XXOP#}yyMMddhhmmssfff'));
 
             _nwnd.title = '';
-            _stg.scaleMode = StageScaleMode.NO_SCALE;
-            _stg.align = StageAlign.TOP_LEFT;
+            _stage.scaleMode = StageScaleMode.NO_SCALE;
+            _stage.align = StageAlign.TOP_LEFT;
             MNwndHelper.align_rightBottom(_nwnd, 10, 60);
 
             _napp.addEventListener(InvokeEvent.INVOKE,
@@ -60,7 +60,7 @@ package
         {
             if (tmdnm == null)
             {
-                MLoaderUtil.createAndLoad(_own, './Fla00Main.swf', null,
+                MLoaderUtil.createAndLoad(_owner, './Fla00Main.swf', null,
                     function(evt:Event):void
                     {
                         _nwnd.title = '개발자 도구  v1.00';
@@ -80,8 +80,11 @@ package
 
         private function pp_main_itemClick(evt:CBumEvent):void
         {
+            var tmdtit:String = evt.get_dataObj().mdtit;
             var tmdnm:String = evt.get_dataObj().mdnm;
-            pp_nwndCreate(tmdnm, 600, 500);
+            var tmdw:Number = evt.get_dataObj().mdw;
+            var tmdh:Number = evt.get_dataObj().mdh;
+            pp_nwndCreate(tmdtit, tmdnm, tmdw, tmdh);
         }
 
         private function pp_nwndClear(tmdnm:String):void
@@ -106,9 +109,9 @@ package
             p_test('메모리 정리 했어요~~');
         }
 
-        private function pp_nwndCreate(tmdnm:String, tsw:Number, tsh:Number):void
+        private function pp_nwndCreate(tmdtit:String, tmdnm:String, tsw:Number, tsh:Number):void
         {
-            var tnw:NativeWindow = _dicNwnd[tmdnm];
+            var tnw:NativeWindow = _dicNwnd[tmdtit];
             if (tnw != null)
             {
                 tnw.activate();
@@ -121,7 +124,7 @@ package
                 tnwio.maximizable = false;
                 tnwio.resizable = false;
                 tnw = new NativeWindow(tnwio);
-                tnw.title = tmdnm;
+                tnw.title = tmdtit;
                 tnw.addEventListener(Event.CLOSING, pp_nwndClosing);
 
                 var tstg:Stage = tnw.stage;
@@ -130,11 +133,12 @@ package
                 tstg.stageWidth = tsw;
                 tstg.stageHeight = tsh;
 
-                MLoaderUtil.createAndLoad(tstg, './' + tmdnm + '.swf');
+                var tfurl:String = './' + tmdnm + '.swf';
+                MLoaderUtil.createAndLoad(tstg, tfurl);
                 MNwndHelper.align_rightBottom(tnw, 10, 60);
                 tnw.activate();
 
-                _dicNwnd[tmdnm] = tnw;
+                _dicNwnd[tmdtit] = tnw;
             }
         }
     }
