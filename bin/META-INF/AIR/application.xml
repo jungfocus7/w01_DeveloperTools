@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <application xmlns="http://ns.adobe.com/air/application/31.0">
-  <id>XXOP181006062517086</id>
+  <id>XXOP181011010920928</id>
   <versionNumber>1.0</versionNumber>
   <filename>DeveloperTools</filename>
   <description/>
@@ -10,13 +10,13 @@
     <content>DeveloperTools.swf</content>
     <systemChrome>standard</systemChrome>
     <transparent>false</transparent>
-    <visible>true</visible>
-    <fullScreen>false</fullScreen>
+    <visible>false</visible>
+    <fullScreen>true</fullScreen>
     <aspectRatio>portrait</aspectRatio>
     <renderMode>direct</renderMode>
     <maximizable>false</maximizable>
     <minimizable>true</minimizable>
-    <resizable>false</resizable>	
+    <resizable>false</resizable>
   </initialWindow>
   <icon/>
   <customUpdateUI>false</customUpdateUI>

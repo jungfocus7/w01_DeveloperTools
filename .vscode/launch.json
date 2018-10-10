@@ -9,12 +9,15 @@
             "request": "launch",
             "name": "Launch SWF",
             "internalConsoleOptions": "openOnSessionStart",
-            //"preLaunchTask": "build-debug"
-        },
-        {
-            "type": "swf",
-            "request": "attach",
-            "name": "Attach SWF"
+            "preLaunchTask": "update-files"
+            //"preLaunchTask": "run-shell"
         }
+
+        // ,
+        // {
+        //     "type": "swf",
+        //     "request": "attach",
+        //     "name": "Attach SWF"
+        // }
     ]
 }

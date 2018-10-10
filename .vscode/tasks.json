@@ -4,13 +4,81 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "identifier": "build-debug",
-            "type": "actionscript",
-            "debug": true,
+            "label": "build-update",
+            "dependsOn": ["build-release", "update-files"],
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
         }
+
+        ,
+        {
+            "label": "build-release",
+            "type": "actionscript",
+            "debug": false,
+            "group": "build",
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false
+            }
+        }
+
+        ,
+        {
+            "label": "update-files",
+            "type": "shell",
+            "windows": {
+                "command": ".\\update-files.cmd",
+            },
+            "group": "build",
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false
+            }
+        }
+
+
+
+
+
+
+
+
+        // ,
+        // {
+        //     "identifier": "build-debug",
+        //     "type": "actionscript",
+        //     "debug": true,
+        //     "group": {
+        //         "kind": "build",
+        //         "isDefault": true
+        //     }
+        // }
+
+        // ,
+        // {
+        //     "identifier": "build-update",
+        //     "label": "Run tests",
+        //     "type": "shell",
+        //     //"command": "./scripts/test.sh",
+        //     "windows": {
+        //         "command": ".\\BuildUpdate.cmd"
+        //     },
+        //     "group": "test",
+        //     "presentation": {
+        //         "reveal": "always",
+        //         "panel": "new"
+        //     }
+        // }
+
+
+        ///
     ]
 }
